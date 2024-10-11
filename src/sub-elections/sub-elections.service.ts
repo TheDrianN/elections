@@ -53,7 +53,7 @@ export class SubElectionsService extends PrismaClient implements OnModuleInit{
 
     if(!subelection){
       throw new RpcException({
-        message:`El voto con el id ${id} no existe`,
+        message:`La sub eleccion con el id ${id} no existe`,
         status: HttpStatus.BAD_REQUEST
       })
     }

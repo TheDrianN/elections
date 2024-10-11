@@ -35,7 +35,7 @@ export class SubElectionsController {
   }
 
   @MessagePattern('finAllSubElectionbyStatus')
-  finAllSubElectionbyStatus(@Payload('id',ParseIntPipe) id: string) {
+  finAllSubElectionbyStatus() {
     return this.subElectionsService.finAllSubElectionbyStatus();
   }
 

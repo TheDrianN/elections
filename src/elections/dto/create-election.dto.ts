@@ -1,4 +1,4 @@
-import { IsDateString, IsString } from "class-validator";
+import { IsDateString, IsString ,IsOptional} from "class-validator";
 
 export class CreateElectionDto {
     @IsString()
@@ -11,4 +11,7 @@ export class CreateElectionDto {
     public end_date: Date;
     @IsString()
     public status: string;
+    @IsString()
+    @IsOptional()
+    public number_voters: string;
 }

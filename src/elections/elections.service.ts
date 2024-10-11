@@ -26,9 +26,9 @@ export class ElectionsService extends PrismaClient implements OnModuleInit {
   
     // Mapeo de los códigos de estado a descripciones
     const statusMap = {
-      'P': 'Pendiente',
-      'E': 'En Proceso',
-      'F': 'Finalizado'
+      'P': 'VIGENTE',
+      'E': 'EN PROCESO',
+      'F': 'NO VIGENTE'
     };
   
     const elections = await this.elections.findMany({
@@ -59,7 +59,7 @@ export class ElectionsService extends PrismaClient implements OnModuleInit {
 
     if(!election){
       throw new RpcException({
-        message:`El voto con el id ${id} no existe`,
+        message:`La elección con el id ${id} no existe`,
         status: HttpStatus.BAD_REQUEST
       })
     }
@@ -131,7 +131,63 @@ export class ElectionsService extends PrismaClient implements OnModuleInit {
         message: 'Error al obtener las subelecciones',
       };
     }
+  }
 
-    
+  async findSubelectionChapter(election_id:number, chapter_id: number){
+    try{
+      const subElections = await this.elections.findMany({
+        where: {
+          id: election_id
+        },
+        include: {
+          subElections: {
+            where: {
+              election_id: election_id,
+              OR: [
+                { chapter_id: chapter_id },  // Coincide con el chapter_id proporcionado
+                { chapter_id: 0 }            // O con chapter_id igual a 0
+              ]
+            }
+          }
+        }
+      });
+
+
+  
+      return {
+        status:HttpStatus.ACCEPTED,
+        data: subElections
+      };
+    } catch (error) {
+      return {
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        message: 'Error al obtener las subelecciones',
+      };
+    }
+  }
+
+  async findElectionstatusP(){
+    try{
+      const dateelections = await this.elections.findMany({
+        where:{
+          status: 'P'
+        },include:{
+          subElections:{
+            
+          }
+        }
+      })
+  
+      return {
+        status:HttpStatus.ACCEPTED,
+        data: dateelections
+      };
+
+    } catch (error) {
+      return {
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        message: 'Error al obtener la eleción',
+      };
+    }
   }
 }

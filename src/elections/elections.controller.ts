@@ -38,4 +38,16 @@ export class ElectionsController {
   findAllsubelections(@Payload('id',ParseIntPipe) id: number) {
     return this.electionsService.findAllsubelection(id);
   }
+
+  @MessagePattern('findSubelectionChapter')
+  findSubelectionChapter(
+    @Payload() payload: { election_id: number; chapter_id: number },
+  ) {
+    const { election_id, chapter_id } = payload; // Extrae los valores del payload
+    return this.electionsService.findSubelectionChapter(election_id, chapter_id);
+  }
+  @MessagePattern('findElectionstatusP')
+  findElectionstatusP()  {
+    return this.electionsService.findElectionstatusP();
+  }
 }

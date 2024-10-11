@@ -5,4 +5,5 @@ export class Election {
     public start_date: Date;
     public end_date: Date;
     public status: string;
+    public number_voters: string;
 }

@@ -22,7 +22,7 @@ model Elections {
   status      String    @db.Char(1)
   created_at  DateTime  @default(now()) @db.Timestamp(0)
   updated_at  DateTime  @updatedAt @db.Timestamp(0)
-
+  number_voters  String    @db.VarChar(9)
   subElections SubElections[]
 }
 
