@@ -82,14 +82,14 @@ export class SubElectionsService extends PrismaClient implements OnModuleInit{
   async remove(id: number) {
     await this.findOne(id);
 
-    const subelection = await this.subElections.update({
-      where:{id},
-      data:{
-        title:'Hola'
-      }
+    const subelection = await this.subElections.delete({
+      where:{id}
     })
 
-    return subelection;
+    return {
+      status:HttpStatus.ACCEPTED,
+      data: subelection
+    };
   }
 
   async finAllSubElectionbyStatus(){
