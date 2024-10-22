@@ -106,7 +106,7 @@ export class ElectionsService extends PrismaClient implements OnModuleInit {
 
     return {
       status:HttpStatus.OK,
-      message: 'Capítulo eliminado correctamente',
+      message: 'Eleccion eliminado correctamente',
       data: election
     };
   }
