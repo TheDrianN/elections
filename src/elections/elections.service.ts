@@ -94,18 +94,16 @@ export class ElectionsService extends PrismaClient implements OnModuleInit {
 
     if(subelection){
       throw new RpcException({
-        message:`Eleccion ${id} no se puede eliminar`,
-        status: HttpStatus.BAD_REQUEST
+        message: 'No se puede eliminar la Eleccion. Está asociado a otros datos.',
+        status: HttpStatus.CONFLICT,
       })
     }
 
-    const election = await this.elections.delete({
-      where: {id},
-    })
+  
 
     return {
-      status:HttpStatus.ACCEPTED,
-      data: election
+      status:HttpStatus.OK,
+      message: 'Capítulo eliminado correctamente',
     };
   }
 
