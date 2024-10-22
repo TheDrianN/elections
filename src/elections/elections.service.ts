@@ -99,11 +99,15 @@ export class ElectionsService extends PrismaClient implements OnModuleInit {
       })
     }
 
-  
+    const election = await this.elections.delete({
+      where:{id},
+    })
+
 
     return {
       status:HttpStatus.OK,
       message: 'Capítulo eliminado correctamente',
+      data: election
     };
   }
 
