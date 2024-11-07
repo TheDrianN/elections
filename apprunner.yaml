@@ -13,7 +13,7 @@ run:
   command: npm run start:prod
   network:
     port: 3004
-  environment:
+  env:
     variables:
       PORT: 3004
       DATABASE_URL: 'mysql://admin:cip20242@bdcip.c16mgawm2sxa.us-east-2.rds.amazonaws.com:3306/bdcip_elections?schema=public'
