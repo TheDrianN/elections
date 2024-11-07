@@ -24,7 +24,7 @@ async function bootstrap() {
    const microservice = app.connectMicroservice<MicroserviceOptions>({
      transport: Transport.TCP,
      options: {
-       port: 3004, // Puerto del microservicio
+       port: envs.port_mc, // Puerto del microservicio
      },
    });
  

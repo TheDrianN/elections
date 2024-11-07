@@ -5,9 +5,10 @@ build:
     pre-build:
       - npm install
     build:
-      - npm run prisma:generate
+      - npx prisma generate
       - npm run build
     post-build:
+      - npx prisma db push
       - echo "Compilación completada"
 run:
   command: npm run start:prod
