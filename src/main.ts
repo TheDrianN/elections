@@ -16,7 +16,7 @@ async function bootstrap() {
    );
 
    console.log("Port1",process.env.PORT);
-   console.log("Port2",envs.port);
+   console.log("Port2",envs.port_mc);
    // Configurar puerto HTTP desde variable de entorno
    const port = process.env.PORT || 8080;  // Cambio aquí
    await app.listen(port); 

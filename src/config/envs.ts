@@ -2,7 +2,7 @@ import 'dotenv/config'
 import * as joi from 'joi'
 
 interface EnvVars{
-    PORT: number;
+    PORT_MC: number;
     DATABASE_URL: string;
    
 }
@@ -25,7 +25,7 @@ if (error){
 const EnvVars: EnvVars = value;
 
 export const envs = {
-    port: EnvVars.PORT,
+    port_mc: EnvVars.PORT_MC,
     databaseUrl: EnvVars.DATABASE_URL,
    
 };
