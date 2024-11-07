@@ -15,5 +15,7 @@ run:
     port: 3004
   env:
     variables:
-      PORT: 3004
-      DATABASE_URL: 'mysql://admin:cip20242@bdcip.c16mgawm2sxa.us-east-2.rds.amazonaws.com:3306/bdcip_elections?schema=public'
+      - PORT:
+        value-from: 3004
+      - DATABASE_URL:
+        value-from: "mysql://admin:cip20242@bdcip.c16mgawm2sxa.us-east-2.rds.amazonaws.com:3306/bdcip_elections?schema=public"
