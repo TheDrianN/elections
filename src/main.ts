@@ -5,22 +5,29 @@ import { envs } from './config';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
-    AppModule,{
-      transport: Transport.TCP,
-      options:{
-        port: envs.port
-      }
-    }
-  );
+   // Crear servidor HTTP
+   const app = await NestFactory.create(AppModule);
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist:true,
-      forbidUnknownValues: true,
-    })
-  )
-  
-  await app.listen();
+   app.useGlobalPipes(
+     new ValidationPipe({
+       whitelist: true,
+       forbidUnknownValues: true,
+     }),
+   );
+ 
+   // Configurar puerto HTTP desde variable de entorno
+   const port = envs.port ;
+ 
+   // Conectar microservicio TCP
+   const microservice = app.connectMicroservice<MicroserviceOptions>({
+     transport: Transport.TCP,
+     options: {
+       port: envs.port, // Puerto del microservicio
+     },
+   });
+ 
+   await app.startAllMicroservices(); // Inicia microservicio
+   await app.listen(port);            // Inicia servidor HTTP
+
 }
 bootstrap();
