@@ -16,8 +16,8 @@ async function bootstrap() {
    );
  
    // Configurar puerto HTTP desde variable de entorno
-   const port = process.env.PORT || 3000;  // Cambio aquí
- 
+   const port = process.env.PORT || 8080;  // Cambio aquí
+   await app.listen(port); 
    // Conectar microservicio TCP
    const microservice = app.connectMicroservice<MicroserviceOptions>({
      transport: Transport.TCP,
@@ -27,7 +27,7 @@ async function bootstrap() {
    });
  
    await app.startAllMicroservices(); // Inicia microservicio
-   await app.listen(port);            // Inicia servidor HTTP
+           // Inicia servidor HTTP
 
 }
 bootstrap();
