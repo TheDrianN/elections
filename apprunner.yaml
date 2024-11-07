@@ -12,7 +12,7 @@ build:
 run:
   command: npm run start:prod
   network:
-    port: 8080
+    port: 3000
   env:
       - name: PORT
         value: "3004"
